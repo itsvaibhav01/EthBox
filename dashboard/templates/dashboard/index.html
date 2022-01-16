@@ -1,0 +1,144 @@
+{%  extends 'dashboard/main.html' %}
+
+{% block content %}
+
+<br>
+<div class="row">
+    <!-- dashboard bar -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Dashboard</h3>
+            </div>
+            <div class="col-md-4" id="alert-div">
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+
+
+    <div class="col-md-1"></div>
+
+    <!-- list of users  -->
+    <div class="col-md-7">
+        <table class="table">
+            <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Aadhar</th>
+                  <th scope="col">Pan</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">v-KYC</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Source</th>
+                  <th scope="col">Blockchain</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for obj in clients %}
+                    {% if obj.status %}
+                    <tr class="table-success">
+                    {% else %}
+                    <tr class="table-light">
+                    {% endif %}
+                        <td>{{obj.name}}</td>
+                        <td>{{obj.aadhar}}</td>
+                        <td>{{obj.pan}}</td>
+                        <td>{{obj.email}}</td>
+                        <td> <button type="button" class="btn btn-outline-primary">Send Request</button> </td>
+                        <td> 
+                            <div class="form-check form-switch">
+                                {% if obj.status %}
+                                <input class="form-check-input" type="checkbox" id="check_switch_{{obj.id}}" checked>
+                                {% else %}
+                                <input class="form-check-input" type="checkbox" id="check_switch_{{obj.id}}">
+                                {% endif %}
+                            </div>
+                        </td>
+                        <td>{{obj.source}}</td>
+                        <td>
+                            <button type="button" class="btn btn-outline-warning" onclick="send_doc('{{obj.aadhar}}', document.getElementById('check_switch_{{obj.id}}').checked, '{{obj.source}}')">Update</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- form to create users -->
+    <div class="col-md-3">
+        <h5  style="text-align:center;"> add new client </h5>
+        <div class="container" style="text-align: right;">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{form.as_p}}
+                <input type="submit">
+            </form></div>
+        </div>
+        
+    <div class="col-md-1"></div>
+</div>
+
+<script>
+    var csrftoken = $("[name=csrfmiddlewaretoken]").val();
+    
+    // update doc
+    function send_doc(id, bool, source){
+        $.ajax({
+            type: "POST", 
+            url: "/api/putdoc/",
+            headers:{
+                "X-CSRFToken": csrftoken
+            },
+            data: {'id':id, 'bool':bool, 'source': source},
+            beforeSend: function(){}, 
+            complete: function(){}, 
+            success: function(data){
+                var msg = data['return'];
+                make_alert(msg);   
+            }
+        });
+    }
+
+    // get doc
+    function get_doc(id){
+        $.ajax({
+            type: "POST", 
+            url: "/api/getdoc/",
+            headers:{
+                "X-CSRFToken": csrftoken
+            },
+            data: {'id':id},
+            beforeSend: function(){}, 
+            complete: function(){}, 
+            success: function(){alert()}
+        });
+    }
+
+    // give alert 
+    function make_alert(msg){
+        var alert_box = document.getElementById('alert-div');
+        if (msg == "already-exists-in-blockchain"){
+            alert_box.innerHTML = `
+            <div class="alert alert-warning alert-dismissible fade show" role="alert" style='text-align:center;'>
+                <strong>
+                    Transaction already exist in blockchain 
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </strong> 
+            </div>`
+        }
+
+        else {
+            alert_box.innerHTML = `
+            <div class="alert alert-warning alert-dismissible fade show" role="alert" style='text-align:center;'>
+                <strong>
+                    Updated &nbsp
+                    <a target="_blank" href="https://ropsten.etherscan.io/tx/` + msg + `"> Click to see the ropsten transaction</a> 
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </strong> 
+            </div>`
+        }
+    }
+</script>
+
+{% endblock %}
