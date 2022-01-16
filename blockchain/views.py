@@ -2,7 +2,7 @@ import typing_extensions
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
-from infura.infura_serve import contract
+from ganache.ganache_serve import contract
 from dashboard.models import Client
 
 

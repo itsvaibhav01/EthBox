@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import Client
 from .forms import ClientForm
-from infura.infura_serve import contract
+from ganache.ganache_serve import contract
 
 
 # Create your views here.
