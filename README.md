@@ -1,4 +1,8 @@
-# Eth-Box
+[![](https://img.shields.io/badge/Ethereum-3C3C3D?style=for-the-badge&logo=Ethereum&logoColor=white)]()
+[![](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=green)]()
+[![](https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white)]()
+# <img src="project-img/ethbox_icon.svg" alt="drawing" width="20"/>  Eth-Box 
+
 ---
 **A Blockchain-Based Solution For Efficient And Secure Video-KYC**
 
@@ -34,3 +38,27 @@ pip install -r requirements.txt
 ```bash
 python3 manage.py runserver
 ```
+
+### App
+Landing page
+<img src="project-img/landing.png" alt="drawing">
+
+<br>
+
+Dashboard
+<img src="project-img/dashboard.png" alt="drawing">
+
+<br>
+
+Client Login
+<img src="project-img/dash_login.png" alt="drawing">
+
+<br>
+
+Admin page
+<img src="project-img/admin.png" alt="drawing">
+
+<br>
+
+Admin login
+<img src="project-img/admin_login.png" alt="drawing">
