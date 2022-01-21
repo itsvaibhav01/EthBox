@@ -6,6 +6,10 @@
 ---
 **A Blockchain-Based Solution For Efficient And Secure Video-KYC**
 
+## YouTube Video Demo 
+
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/7GEaOhPgjtI/0.jpg)](http://www.youtube.com/watch?v=7GEaOhPgjtI "EthBox: An ethereum backed vKYC solution | Python DApp | Django DApp")
+
 ## How to start locally
   *if you want to run the blockchain in real Ethereum network else you can run a local blockchain using Ganache and skip the Infura setup.*
   
