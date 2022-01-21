@@ -3,7 +3,6 @@
 [![](https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white)]()
 # <img src="project-img/ethbox_icon.svg" alt="drawing" width="20"/>  Eth-Box 
 
----
 **A Blockchain-Based Solution For Efficient And Secure Video-KYC**
 
 ## YouTube Video Demo 
